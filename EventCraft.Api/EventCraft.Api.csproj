@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventCraft.Application\EventCraft.Application.csproj" />
+    <ProjectReference Include="..\EventCraft.Infrastructure\EventCraft.Infrastructure.csproj" />
     <ProjectReference Include="..\EventCraft.Workers\EventCraft.Workers.csproj" />
   </ItemGroup>
 
