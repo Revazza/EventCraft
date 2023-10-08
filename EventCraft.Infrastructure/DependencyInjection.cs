@@ -1,6 +1,9 @@
 using EventCraft.Application;
+using EventCraft.Application.Authentication;
+using EventCraft.Application.Interfaces;
 using EventCraft.Domain.Users;
 using EventCraft.Infrastructure.Db;
+using EventCraft.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,12 +21,20 @@ public static class DependencyInjection
                 .EnableDetailedErrors(true)
                 .EnableSensitiveDataLogging(true);
         })
-            .AddIdentity<User,UserRole>()
+            .AddIdentity<User, UserRole>()
             .AddEntityFrameworkStores<EventCraftDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddApplication(configure);
+        services.AddApplication(configure)
+            .AddServices();
 
+        return services;
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IFeedItemRepository, FeedItemRepository>();
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
         return services;
     }
 

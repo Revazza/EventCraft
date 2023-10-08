@@ -12,14 +12,11 @@ namespace EventCraft.Api.Controllers
     public class FeedItemController : ControllerBase
     {
         private readonly ISender _mediator;
-        private readonly IMemoryCache _cache;
 
         public FeedItemController(
-            ISender mediator, 
-            IMemoryCache cache)
+            ISender mediator)
         {
             _mediator = mediator;
-            _cache = cache;
         }
 
 

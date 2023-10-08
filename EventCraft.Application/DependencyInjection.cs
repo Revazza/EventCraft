@@ -1,4 +1,5 @@
 using EventCraft.Application.Authentication;
+using EventCraft.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ public static class DependencyInjection
 
         return services;
     }
+
 
     private static IServiceCollection AddAuthenticationConfigurations(
         this IServiceCollection services,

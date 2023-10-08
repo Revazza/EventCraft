@@ -7,7 +7,6 @@ namespace EventCraft.Infrastructure.Repositories;
 public class GenericRepository<T, TId>
     : IGenericRepository<T, TId>
     where T : class
-    where TId : class
 {
     protected readonly EventCraftDbContext _context;
     private readonly DbSet<T> _entities;

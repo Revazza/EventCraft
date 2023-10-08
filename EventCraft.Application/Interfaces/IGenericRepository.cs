@@ -2,7 +2,6 @@
 
 public interface IGenericRepository<T, TId>
     where T : class
-    where TId : class
 {
     Task AddAsync(T entity);
     IQueryable<T> GetAll();
