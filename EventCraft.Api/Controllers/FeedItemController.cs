@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using EventCraft.Application.Query.FeedItems.GetAllFeedItems;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace EventCraft.Api.Controllers
 {
@@ -19,13 +19,14 @@ namespace EventCraft.Api.Controllers
             _mediator = mediator;
         }
 
-
+        [AllowAnonymous]
         [HttpGet("GetFeedItems")]
         public async Task<IActionResult> GetFeedItems()
         {
-            
+            var query = new GetAllFeedItemsQuery();
+            var response = await _mediator.Send(query);
 
-            return Ok();
+            return Ok(response);
         }
 
 

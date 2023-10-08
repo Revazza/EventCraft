@@ -61,7 +61,8 @@ namespace EventCraft.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,8 +207,15 @@ namespace EventCraft.Infrastructure.Migrations
                 columns: table => new
                 {
                     EventId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaxNumberOfPeople = table.Column<int>(type: "int", nullable: false),
+                    IsOffline = table.Column<bool>(type: "bit", nullable: false),
+                    IsFree = table.Column<bool>(type: "bit", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,18)", precision: 18, scale: 18, nullable: false),
+                    OnlineUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location_Longitude = table.Column<decimal>(type: "decimal(18,18)", precision: 18, scale: 18, nullable: false),
+                    Location_Latitude = table.Column<decimal>(type: "decimal(18,18)", precision: 18, scale: 18, nullable: false),
                     AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -274,10 +282,11 @@ namespace EventCraft.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Hash", "Interval", "Url" },
                 values: new object[,]
                 {
-                    { new Guid("00823c73-6507-4411-88ab-996bffb6f242"), new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2538), "", 3600000, "https://pitchfork.com/rss/reviews/best/albums/" },
-                    { new Guid("a1672030-9394-4a2a-88a6-1dec638c9f4c"), new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2615), "", 3600000, "https://pitchfork.com/feed/feed-track-reviews/rss" },
-                    { new Guid("b1dcf06c-270d-4627-8676-48266f00cc2d"), new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2614), "", 3600000, "https://pitchfork.com/rss/reviews/best/reissues/" },
-                    { new Guid("cc97c60c-bc47-43e9-9a63-51292dfa229c"), new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2612), "", 3600000, "https://pitchfork.com/rss/reviews/best/tracks/" }
+                    { new Guid("352426ca-7fae-4c7d-9934-caf2d5ed8cbe"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4241), "", 3600000, "https://pitchfork.com/rss/reviews/best/reissues/" },
+                    { new Guid("3a48744c-2339-4929-8aef-408f09a14cff"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4240), "", 3600000, "https://pitchfork.com/rss/reviews/best/tracks/" },
+                    { new Guid("8d62b422-ea9a-4334-b2a6-39da63693dae"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4244), "", 3600000, "https://pitchfork.com/feed/feed-album-reviews/rss" },
+                    { new Guid("a71236fd-6180-4ba0-9e53-0617ee98da66"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4242), "", 3600000, "https://pitchfork.com/feed/feed-track-reviews/rss" },
+                    { new Guid("f140bdb7-f902-47e6-a99f-fd3af0e83eeb"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4170), "", 3600000, "https://pitchfork.com/rss/reviews/best/albums/" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -14,9 +14,17 @@ public class EventConfigurations : IEntityTypeConfiguration<Event>
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => new EventId(value));
 
+        builder.Property(x => x.Price).HasPrecision(18, 18);
+
         builder.HasOne(x => x.Author)
             .WithMany(x => x.UserEvents)
             .HasForeignKey(x => x.AuthorId);
+
+        builder.OwnsOne(e => e.Location, location =>
+               {
+                   location.Property(l => l.Longitude).HasPrecision(18, 18).IsRequired();
+                   location.Property(l => l.Latitude).HasPrecision(18, 18).IsRequired();
+               });
 
     }
 }

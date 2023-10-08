@@ -24,7 +24,7 @@ public class AuthenticationController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost("AddUser")]
+    [HttpPost("Login")]
     public async Task<IActionResult> Login(AddUserRequest r)
     {
         var command = new AddUserCommand(r.UserName, r.Email, r.Password);

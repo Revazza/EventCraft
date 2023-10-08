@@ -17,7 +17,8 @@ public static class DependencyInjection
         services.AddAuthenticationConfigurations(configure);
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
-        );
+        ).AddMemoryCache();
+
 
         return services;
     }

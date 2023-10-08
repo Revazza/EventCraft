@@ -67,9 +67,26 @@ namespace EventCraft.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
+                    b.Property<bool>("IsFree")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOffline")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxNumberOfPeople")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OnlineUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 18)
+                        .HasColumnType("decimal(18,18)");
 
                     b.HasKey("EventId");
 
@@ -86,6 +103,9 @@ namespace EventCraft.Infrastructure.Migrations
 
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
@@ -146,35 +166,43 @@ namespace EventCraft.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("00823c73-6507-4411-88ab-996bffb6f242"),
-                            CreatedAt = new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2538),
+                            Id = new Guid("f140bdb7-f902-47e6-a99f-fd3af0e83eeb"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4170),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/rss/reviews/best/albums/"
                         },
                         new
                         {
-                            Id = new Guid("cc97c60c-bc47-43e9-9a63-51292dfa229c"),
-                            CreatedAt = new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2612),
+                            Id = new Guid("3a48744c-2339-4929-8aef-408f09a14cff"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4240),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/rss/reviews/best/tracks/"
                         },
                         new
                         {
-                            Id = new Guid("b1dcf06c-270d-4627-8676-48266f00cc2d"),
-                            CreatedAt = new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2614),
+                            Id = new Guid("352426ca-7fae-4c7d-9934-caf2d5ed8cbe"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4241),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/rss/reviews/best/reissues/"
                         },
                         new
                         {
-                            Id = new Guid("a1672030-9394-4a2a-88a6-1dec638c9f4c"),
-                            CreatedAt = new DateTime(2023, 10, 8, 6, 21, 35, 728, DateTimeKind.Utc).AddTicks(2615),
+                            Id = new Guid("a71236fd-6180-4ba0-9e53-0617ee98da66"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4242),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/feed/feed-track-reviews/rss"
+                        },
+                        new
+                        {
+                            Id = new Guid("8d62b422-ea9a-4334-b2a6-39da63693dae"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4244),
+                            Hash = "",
+                            Interval = 3600000,
+                            Url = "https://pitchfork.com/feed/feed-album-reviews/rss"
                         });
                 });
 
@@ -415,7 +443,31 @@ namespace EventCraft.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.OwnsOne("EventCraft.Domain.Events.GeoLocation", "Location", b1 =>
+                        {
+                            b1.Property<Guid>("EventId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<decimal>("Latitude")
+                                .HasPrecision(18, 18)
+                                .HasColumnType("decimal(18,18)");
+
+                            b1.Property<decimal>("Longitude")
+                                .HasPrecision(18, 18)
+                                .HasColumnType("decimal(18,18)");
+
+                            b1.HasKey("EventId");
+
+                            b1.ToTable("Events");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EventId");
+                        });
+
                     b.Navigation("Author");
+
+                    b.Navigation("Location")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<EventCraft.Domain.Users.UserId>", b =>

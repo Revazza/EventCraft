@@ -16,12 +16,17 @@ public record GeoLocation(decimal Longitude, decimal Latitude);
 public class Event
 {
     public EventId EventId { get; set; } = null!;
-    public string Title { get; set; } = null!;
+    public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
+    public int MaxNumberOfPeople { get; set; }
+    public bool IsOffline { get; set; }
+    public bool IsFree { get; set; }
+    public decimal Price { get; set; }
+    public string OnlineUrl { get; set; } = null!;
+    public GeoLocation Location { get; set; } = null!;
     public User Author { get; set; } = null!;
     public UserId AuthorId { get; set; } = null!;
     public List<UserEventAttendance> Guests { get; set; }
-    //public GeoLocation Location { get; set; } = null!;
     public List<AttendeeRequest> AttendeeRequests { get; set; }
 
     public Event()
