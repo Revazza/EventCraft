@@ -216,6 +216,7 @@ namespace EventCraft.Infrastructure.Migrations
                     OnlineUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Location_Longitude = table.Column<decimal>(type: "decimal(18,18)", precision: 18, scale: 18, nullable: false),
                     Location_Latitude = table.Column<decimal>(type: "decimal(18,18)", precision: 18, scale: 18, nullable: false),
+                    Category = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -282,11 +283,11 @@ namespace EventCraft.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedAt", "Hash", "Interval", "Url" },
                 values: new object[,]
                 {
-                    { new Guid("352426ca-7fae-4c7d-9934-caf2d5ed8cbe"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4241), "", 3600000, "https://pitchfork.com/rss/reviews/best/reissues/" },
-                    { new Guid("3a48744c-2339-4929-8aef-408f09a14cff"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4240), "", 3600000, "https://pitchfork.com/rss/reviews/best/tracks/" },
-                    { new Guid("8d62b422-ea9a-4334-b2a6-39da63693dae"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4244), "", 3600000, "https://pitchfork.com/feed/feed-album-reviews/rss" },
-                    { new Guid("a71236fd-6180-4ba0-9e53-0617ee98da66"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4242), "", 3600000, "https://pitchfork.com/feed/feed-track-reviews/rss" },
-                    { new Guid("f140bdb7-f902-47e6-a99f-fd3af0e83eeb"), new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4170), "", 3600000, "https://pitchfork.com/rss/reviews/best/albums/" }
+                    { new Guid("162221d0-5839-420c-b90c-3715c0b206b8"), new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7412), "", 3600000, "https://pitchfork.com/feed/feed-track-reviews/rss" },
+                    { new Guid("2c6149e3-060e-4c5e-9e86-c08276241da1"), new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7414), "", 3600000, "https://pitchfork.com/feed/feed-album-reviews/rss" },
+                    { new Guid("3758d823-ceb9-41bd-8b65-18d292ff6a8b"), new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7410), "", 3600000, "https://pitchfork.com/rss/reviews/best/tracks/" },
+                    { new Guid("7000d1f4-f6f2-4901-8780-469b5ca913b9"), new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7411), "", 3600000, "https://pitchfork.com/rss/reviews/best/reissues/" },
+                    { new Guid("e7331472-576a-416e-af53-12d61513846b"), new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7296), "", 3600000, "https://pitchfork.com/rss/reviews/best/albums/" }
                 });
 
             migrationBuilder.CreateIndex(

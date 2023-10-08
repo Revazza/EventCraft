@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventCraft.Infrastructure.Migrations
 {
     [DbContext(typeof(EventCraftDbContext))]
-    [Migration("20231008100141_Initial")]
+    [Migration("20231008105321_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -65,6 +65,9 @@ namespace EventCraft.Infrastructure.Migrations
 
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -169,40 +172,40 @@ namespace EventCraft.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f140bdb7-f902-47e6-a99f-fd3af0e83eeb"),
-                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4170),
+                            Id = new Guid("e7331472-576a-416e-af53-12d61513846b"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7296),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/rss/reviews/best/albums/"
                         },
                         new
                         {
-                            Id = new Guid("3a48744c-2339-4929-8aef-408f09a14cff"),
-                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4240),
+                            Id = new Guid("3758d823-ceb9-41bd-8b65-18d292ff6a8b"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7410),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/rss/reviews/best/tracks/"
                         },
                         new
                         {
-                            Id = new Guid("352426ca-7fae-4c7d-9934-caf2d5ed8cbe"),
-                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4241),
+                            Id = new Guid("7000d1f4-f6f2-4901-8780-469b5ca913b9"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7411),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/rss/reviews/best/reissues/"
                         },
                         new
                         {
-                            Id = new Guid("a71236fd-6180-4ba0-9e53-0617ee98da66"),
-                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4242),
+                            Id = new Guid("162221d0-5839-420c-b90c-3715c0b206b8"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7412),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/feed/feed-track-reviews/rss"
                         },
                         new
                         {
-                            Id = new Guid("8d62b422-ea9a-4334-b2a6-39da63693dae"),
-                            CreatedAt = new DateTime(2023, 10, 8, 10, 1, 41, 844, DateTimeKind.Utc).AddTicks(4244),
+                            Id = new Guid("2c6149e3-060e-4c5e-9e86-c08276241da1"),
+                            CreatedAt = new DateTime(2023, 10, 8, 10, 53, 21, 676, DateTimeKind.Utc).AddTicks(7414),
                             Hash = "",
                             Interval = 3600000,
                             Url = "https://pitchfork.com/feed/feed-album-reviews/rss"

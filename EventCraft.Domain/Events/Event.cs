@@ -13,6 +13,13 @@ public record EventId(Guid Value)
 
 public record GeoLocation(decimal Longitude, decimal Latitude);
 
+public enum EventCategory
+{
+    None,
+    Educational,
+    Entertainment
+}
+
 public class Event
 {
     public EventId EventId { get; set; } = null!;
@@ -24,6 +31,7 @@ public class Event
     public decimal Price { get; set; }
     public string OnlineUrl { get; set; } = null!;
     public GeoLocation Location { get; set; } = null!;
+    public EventCategory Category { get; set; }
     public User Author { get; set; } = null!;
     public UserId AuthorId { get; set; } = null!;
     public List<UserEventAttendance> Guests { get; set; }
