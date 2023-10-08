@@ -19,10 +19,29 @@ public static class DependencyInjection
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
         ).AddMemoryCache();
 
+        services.AddCorsPolicy();
 
         return services;
     }
 
+    private static IServiceCollection AddCorsPolicy(
+       this IServiceCollection services)
+    {
+
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(policy =>
+            {
+                policy
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+        });
+
+        return services;
+    }
 
     private static IServiceCollection AddAuthenticationConfigurations(
         this IServiceCollection services,
