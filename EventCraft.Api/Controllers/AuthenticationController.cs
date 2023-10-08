@@ -1,4 +1,5 @@
 ﻿using EventCraft.Application.Command.AddUser;
+using EventCraft.Application.Query.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,8 +28,8 @@ public class AuthenticationController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login(AddUserRequest r)
     {
-        var command = new AddUserCommand(r.UserName, r.Email, r.Password);
-        var response = await _mediator.Send(command);
+        var query = new LoginQuery(r.Email, r.Password);
+        var response = await _mediator.Send(query);
         return Ok(response);
     }
 

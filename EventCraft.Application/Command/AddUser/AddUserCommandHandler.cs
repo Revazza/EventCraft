@@ -36,6 +36,7 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, Response>
 
         user = new User
         {
+            Id = UserId.Create(),
             Email = request.Email,
             UserName = request.UserName
         };
