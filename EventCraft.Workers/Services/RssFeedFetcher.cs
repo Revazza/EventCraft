@@ -46,7 +46,7 @@ public class RssFeedFetcher
         var feedRequests = await context
             .RssFeedRequests
             .ToListAsync();
-     
+
 
         var maxTasks = 10;
         var taskIndex = 0;
@@ -75,6 +75,10 @@ public class RssFeedFetcher
 
         var strXml = await FetchAsync(url);
         var feed = XmlToSyndicationFeed(strXml);
+        if (feed is null)
+        {
+            return;
+        }
         await AddFeedItems(feed, context);
         context.RssFeedRequests.Remove(request);
 
@@ -119,13 +123,19 @@ public class RssFeedFetcher
         return newFeedItem;
     }
 
-    private SyndicationFeed XmlToSyndicationFeed(string strXml)
+    private SyndicationFeed? XmlToSyndicationFeed(string strXml)
     {
         var stringReader = new StringReader(strXml);
+        try
+        {
+            var reader = XmlReader.Create(stringReader);
+            return SyndicationFeed.Load(reader);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
 
-        var reader = XmlReader.Create(stringReader);
-
-        return SyndicationFeed.Load(reader);
     }
 
 }
