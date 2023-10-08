@@ -1,6 +1,7 @@
 using EventCraft.Application;
 using EventCraft.Application.Authentication;
 using EventCraft.Application.Interfaces;
+using EventCraft.Application.Services;
 using EventCraft.Domain.Users;
 using EventCraft.Infrastructure.Db;
 using EventCraft.Infrastructure.Repositories;
@@ -35,6 +36,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IFeedItemRepository, FeedItemRepository>();
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IUserService, UserService>();
         return services;
     }
 
