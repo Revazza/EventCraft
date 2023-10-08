@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using EventCraft.Application.Command.AddUser;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventCraft.Api.Controllers;
@@ -15,13 +16,20 @@ public class AuthenticationController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost("RegisterUser")]
-    public async Task<IActionResult> RegisterUser()
+    [HttpPost("AddUser")]
+    public async Task<IActionResult> AddUser(AddUserRequest r)
     {
-        //var command = ;
-        //var response = await _mediator.Send();
-        return Ok();
+        var command = new AddUserCommand(r.UserName, r.Email, r.Password);
+        var response = await _mediator.Send(command);
+        return Ok(response);
     }
 
+    [HttpPost("AddUser")]
+    public async Task<IActionResult> Login(AddUserRequest r)
+    {
+        var command = new AddUserCommand(r.UserName, r.Email, r.Password);
+        var response = await _mediator.Send(command);
+        return Ok(response);
+    }
 
 }

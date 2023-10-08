@@ -4,8 +4,8 @@ namespace EventCraft.Application.Common;
 
 public enum ResponseStatus
 {
-    Ok,
-    Error
+    Error = 0,
+    Ok = 1,
 }
 
 public class Response

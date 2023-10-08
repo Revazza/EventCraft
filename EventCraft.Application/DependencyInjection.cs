@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 
@@ -13,7 +14,10 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services, ConfigurationManager configure)
     {
         services.AddAuthenticationConfigurations(configure);
-        
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
+        );
+
         return services;
     }
 

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\EventCraft.Domain\EventCraft.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Query\" />
-  </ItemGroup>
-
 </Project>
