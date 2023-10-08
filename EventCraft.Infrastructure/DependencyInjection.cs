@@ -1,5 +1,7 @@
 using EventCraft.Application;
+using EventCraft.Domain.Users;
 using EventCraft.Infrastructure.Db;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +17,12 @@ public static class DependencyInjection
             x.UseSqlServer(configure.GetConnectionString(EventCraftDbContext.ConnectionStringName))
                 .EnableDetailedErrors(true)
                 .EnableSensitiveDataLogging(true);
-        });
+        })
+            .AddIdentity<User,UserRole>()
+            .AddEntityFrameworkStores<EventCraftDbContext>()
+            .AddDefaultTokenProviders();
 
         services.AddApplication(configure);
-
 
         return services;
     }
