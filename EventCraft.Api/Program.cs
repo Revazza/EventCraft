@@ -1,11 +1,12 @@
 using EventCraft.Api;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddCustomServices(builder.Configuration);
 

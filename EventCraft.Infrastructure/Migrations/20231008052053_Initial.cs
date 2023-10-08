@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace EventCraft.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -48,6 +50,49 @@ namespace EventCraft.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FeedItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PublisherId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeedItems", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RssFeedRequests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RssFeedRequests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RssFeedWebsites",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Interval = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Hash = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RssFeedWebsites", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,6 +269,16 @@ namespace EventCraft.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "RssFeedWebsites",
+                columns: new[] { "Id", "CreatedAt", "Hash", "Interval", "Url" },
+                values: new object[,]
+                {
+                    { new Guid("000a9b93-f0b6-49df-8fe3-2a739f8aa615"), new DateTime(2023, 10, 8, 5, 20, 53, 477, DateTimeKind.Utc).AddTicks(5409), "", 60000, "https://pitchfork.com/rss/reviews/best/reissues/" },
+                    { new Guid("1fffb87c-8905-4b8c-aeb6-f2f933d2e7bb"), new DateTime(2023, 10, 8, 5, 20, 53, 477, DateTimeKind.Utc).AddTicks(5407), "", 60000, "https://pitchfork.com/rss/reviews/best/tracks/" },
+                    { new Guid("9150b1f0-4962-40c0-9868-9b3a1d7fa6ff"), new DateTime(2023, 10, 8, 5, 20, 53, 477, DateTimeKind.Utc).AddTicks(5321), "", 60000, "https://pitchfork.com/rss/reviews/best/albums/" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -299,6 +354,15 @@ namespace EventCraft.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AttendeeRequests");
+
+            migrationBuilder.DropTable(
+                name: "FeedItems");
+
+            migrationBuilder.DropTable(
+                name: "RssFeedRequests");
+
+            migrationBuilder.DropTable(
+                name: "RssFeedWebsites");
 
             migrationBuilder.DropTable(
                 name: "UserEventAttendance");

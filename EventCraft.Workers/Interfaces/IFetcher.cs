@@ -1,6 +1,6 @@
-namespace EventCraft.Workers.Interfaces;
+﻿namespace EventCraft.Workers.Interfaces;
 
 public interface IFetcher
 {
-    public Task<string> FetchAsync();
+    public Task StartAsync();
 }

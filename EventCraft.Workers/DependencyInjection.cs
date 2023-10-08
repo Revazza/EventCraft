@@ -1,15 +1,20 @@
-using EventCraft.Workers.Providers.BillBoardProvider;
 using EventCraft.Workers.Workers;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
 
 namespace EventCraft.Workers;
 
-public static class DependencyInjection 
+public static class DependencyInjection
 {
     public static IServiceCollection AddBackgroundWorkers(this IServiceCollection services)
     {
-        services.AddHostedService<BillBoardWorker>();
+        services.AddHostedService<MusicRssFeedWorker>();
+        services.AddLogging(builder =>
+        {
+            builder.AddSerilog();
+        });
         return services;
     }
-
 }

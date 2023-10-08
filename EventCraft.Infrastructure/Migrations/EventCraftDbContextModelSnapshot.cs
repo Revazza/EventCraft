@@ -78,6 +78,98 @@ namespace EventCraft.Infrastructure.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("EventCraft.Domain.FeedItems.FeedItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PublisherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FeedItems");
+                });
+
+            modelBuilder.Entity("EventCraft.Domain.RssFeedRequests.RssFeedRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RssFeedRequests");
+                });
+
+            modelBuilder.Entity("EventCraft.Domain.RssFeedWebsites.RssFeedWebsite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Hash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Interval")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RssFeedWebsites");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9150b1f0-4962-40c0-9868-9b3a1d7fa6ff"),
+                            CreatedAt = new DateTime(2023, 10, 8, 5, 20, 53, 477, DateTimeKind.Utc).AddTicks(5321),
+                            Hash = "",
+                            Interval = 60000,
+                            Url = "https://pitchfork.com/rss/reviews/best/albums/"
+                        },
+                        new
+                        {
+                            Id = new Guid("1fffb87c-8905-4b8c-aeb6-f2f933d2e7bb"),
+                            CreatedAt = new DateTime(2023, 10, 8, 5, 20, 53, 477, DateTimeKind.Utc).AddTicks(5407),
+                            Hash = "",
+                            Interval = 60000,
+                            Url = "https://pitchfork.com/rss/reviews/best/tracks/"
+                        },
+                        new
+                        {
+                            Id = new Guid("000a9b93-f0b6-49df-8fe3-2a739f8aa615"),
+                            CreatedAt = new DateTime(2023, 10, 8, 5, 20, 53, 477, DateTimeKind.Utc).AddTicks(5409),
+                            Hash = "",
+                            Interval = 60000,
+                            Url = "https://pitchfork.com/rss/reviews/best/reissues/"
+                        });
+                });
+
             modelBuilder.Entity("EventCraft.Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
